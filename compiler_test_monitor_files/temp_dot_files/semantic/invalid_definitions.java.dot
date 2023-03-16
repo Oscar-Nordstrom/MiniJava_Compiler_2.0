@@ -1,0 +1,465 @@
+digraph {
+n0 [label="Goal:"];
+n1 [label="MainClass:"];
+n2 [label="Identifier:Factorial"];
+n1 -> n2
+n3 [label="Identifier:a"];
+n1 -> n3
+n4 [label="PrintlnStatement:"];
+n5 [label="ExpressionX2:"];
+n6 [label="NewIdentif:"];
+n7 [label="Identifier:classtest"];
+n6 -> n7
+n5 -> n6
+n8 [label="Identifier:aFunc"];
+n5 -> n8
+n4 -> n5
+n1 -> n4
+n0 -> n1
+n9 [label="ClassList:"];
+n10 [label="ClassDeclaration:"];
+n11 [label="Identifier:classtest"];
+n10 -> n11
+n12 [label="VarDeclarationList:"];
+n13 [label="VarDeclaration:"];
+n14 [label="TYPE:INT"];
+n13 -> n14
+n15 [label="Identifier:a"];
+n13 -> n15
+n12 -> n13
+n16 [label="VarDeclaration:"];
+n17 [label="TYPE:BOOLEAN"];
+n16 -> n17
+n18 [label="Identifier:b"];
+n16 -> n18
+n12 -> n16
+n19 [label="VarDeclaration:"];
+n20 [label="TYPE:INTARR"];
+n19 -> n20
+n21 [label="Identifier:c"];
+n19 -> n21
+n12 -> n19
+n22 [label="VarDeclaration:"];
+n23 [label="Identifier:classdata"];
+n22 -> n23
+n24 [label="Identifier:d"];
+n22 -> n24
+n12 -> n22
+n10 -> n12
+n25 [label="MethodDeclarationList:"];
+n26 [label="MethodDeclaration:"];
+n27 [label="TYPE:INT"];
+n26 -> n27
+n28 [label="Identifier:aFunc"];
+n26 -> n28
+n29 [label="MethodBodyStat:"];
+n30 [label="EqualStatement:"];
+n31 [label="Identifier:e"];
+n30 -> n31
+n32 [label="Identifier:a"];
+n30 -> n32
+n29 -> n30
+n33 [label="MethodBodyStat:"];
+n34 [label="EqualStatement:"];
+n35 [label="Identifier:a"];
+n34 -> n35
+n36 [label="ExpressionX2:"];
+n37 [label="Identifier:d"];
+n36 -> n37
+n38 [label="Identifier:yFunc"];
+n36 -> n38
+n34 -> n36
+n33 -> n34
+n29 -> n33
+n39 [label="MethodBodyStat:"];
+n40 [label="EqualStatement:"];
+n41 [label="Identifier:a"];
+n40 -> n41
+n42 [label="ExpressionX2:"];
+n43 [label="Identifier:d"];
+n42 -> n43
+n44 [label="Identifier:zFunc"];
+n42 -> n44
+n40 -> n42
+n39 -> n40
+n29 -> n39
+n26 -> n29
+n45 [label="Identifier:a"];
+n26 -> n45
+n25 -> n26
+n46 [label="MethodDeclaration:"];
+n47 [label="TYPE:BOOLEAN"];
+n46 -> n47
+n48 [label="Identifier:bFunc"];
+n46 -> n48
+n49 [label="MethodBodyStat:"];
+n50 [label="EqualStatement:"];
+n51 [label="Identifier:b"];
+n50 -> n51
+n52 [label="ExpressionX2:"];
+n53 [label="Identifier:d"];
+n52 -> n53
+n54 [label="Identifier:zzFunc"];
+n52 -> n54
+n50 -> n52
+n49 -> n50
+n55 [label="MethodBodyStat:"];
+n56 [label="EqualStatement:"];
+n57 [label="Identifier:a"];
+n56 -> n57
+n58 [label="ExpressionX2:"];
+n59 [label="Identifier:d"];
+n58 -> n59
+n60 [label="Identifier:xFunc"];
+n58 -> n60
+n56 -> n58
+n55 -> n56
+n49 -> n55
+n61 [label="MethodBodyStat:"];
+n62 [label="EqualStatement:"];
+n63 [label="Identifier:b"];
+n62 -> n63
+n64 [label="ExpressionX2:"];
+n65 [label="This:this"];
+n64 -> n65
+n66 [label="Identifier:zFunc"];
+n64 -> n66
+n62 -> n64
+n61 -> n62
+n49 -> n61
+n67 [label="MethodBodyStat:"];
+n68 [label="EqualStatement:"];
+n69 [label="Identifier:b"];
+n68 -> n69
+n70 [label="ExpressionX2:"];
+n71 [label="This:this"];
+n70 -> n71
+n72 [label="Identifier:aFunc"];
+n70 -> n72
+n68 -> n70
+n67 -> n68
+n49 -> n67
+n73 [label="MethodBodyStat:"];
+n74 [label="EqualStatement:"];
+n75 [label="Identifier:b"];
+n74 -> n75
+n76 [label="ExpressionX2:"];
+n77 [label="Identifier:d"];
+n76 -> n77
+n78 [label="Identifier:xFunc"];
+n76 -> n78
+n74 -> n76
+n73 -> n74
+n49 -> n73
+n79 [label="MethodBodyStat:"];
+n80 [label="EqualStatement:"];
+n81 [label="Identifier:b"];
+n80 -> n81
+n82 [label="ExpressionX2:"];
+n83 [label="Identifier:d"];
+n82 -> n83
+n84 [label="Identifier:zFunc"];
+n82 -> n84
+n80 -> n82
+n79 -> n80
+n49 -> n79
+n46 -> n49
+n85 [label="Identifier:b"];
+n46 -> n85
+n25 -> n46
+n86 [label="MethodDeclaration:"];
+n87 [label="TYPE:INTARR"];
+n86 -> n87
+n88 [label="Identifier:cFunc"];
+n86 -> n88
+n89 [label="MethodBodyStat:"];
+n90 [label="EqualStatement:"];
+n91 [label="Identifier:c"];
+n90 -> n91
+n92 [label="ExpressionX2:"];
+n93 [label="Identifier:d"];
+n92 -> n93
+n94 [label="Identifier:xFunc"];
+n92 -> n94
+n90 -> n92
+n89 -> n90
+n95 [label="MethodBodyStat:"];
+n96 [label="EqualStatement:"];
+n97 [label="Identifier:c"];
+n96 -> n97
+n98 [label="ExpressionX2:"];
+n99 [label="Identifier:d"];
+n98 -> n99
+n100 [label="Identifier:yFunc"];
+n98 -> n100
+n96 -> n98
+n95 -> n96
+n89 -> n95
+n86 -> n89
+n101 [label="Identifier:c"];
+n86 -> n101
+n25 -> n86
+n102 [label="MethodDeclaration:"];
+n103 [label="Identifier:classdata"];
+n102 -> n103
+n104 [label="Identifier:dFunc"];
+n102 -> n104
+n105 [label="MethodBodyStat:"];
+n106 [label="EqualStatement:"];
+n107 [label="Identifier:d"];
+n106 -> n107
+n108 [label="ExpressionX2:"];
+n109 [label="Identifier:d"];
+n108 -> n109
+n110 [label="Identifier:xFunc"];
+n108 -> n110
+n106 -> n108
+n105 -> n106
+n111 [label="MethodBodyStat:"];
+n112 [label="EqualStatement:"];
+n113 [label="Identifier:d"];
+n112 -> n113
+n114 [label="ExpressionX2:"];
+n115 [label="Identifier:d"];
+n114 -> n115
+n116 [label="Identifier:yFunc"];
+n114 -> n116
+n112 -> n114
+n111 -> n112
+n105 -> n111
+n117 [label="MethodBodyStat:"];
+n118 [label="EqualStatement:"];
+n119 [label="Identifier:d"];
+n118 -> n119
+n120 [label="ExpressionX2:"];
+n121 [label="Identifier:d"];
+n120 -> n121
+n122 [label="Identifier:zFunc"];
+n120 -> n122
+n118 -> n120
+n117 -> n118
+n105 -> n117
+n123 [label="MethodBodyStat:"];
+n124 [label="EqualStatement:"];
+n125 [label="Identifier:d"];
+n124 -> n125
+n126 [label="Identifier:d"];
+n124 -> n126
+n123 -> n124
+n105 -> n123
+n102 -> n105
+n127 [label="Identifier:d"];
+n102 -> n127
+n25 -> n102
+n128 [label="MethodDeclaration:"];
+n129 [label="TYPE:BOOLEAN"];
+n128 -> n129
+n130 [label="Identifier:EFUNC"];
+n128 -> n130
+n131 [label="MethodBodyStat:"];
+n132 [label="EqualStatement:"];
+n133 [label="Identifier:a"];
+n132 -> n133
+n134 [label="Identifier:b"];
+n132 -> n134
+n131 -> n132
+n135 [label="MethodBodyStat:"];
+n136 [label="EqualStatement:"];
+n137 [label="Identifier:a"];
+n136 -> n137
+n138 [label="Identifier:c"];
+n136 -> n138
+n135 -> n136
+n131 -> n135
+n139 [label="MethodBodyStat:"];
+n140 [label="EqualStatement:"];
+n141 [label="Identifier:a"];
+n140 -> n141
+n142 [label="Identifier:d"];
+n140 -> n142
+n139 -> n140
+n131 -> n139
+n143 [label="MethodBodyStat:"];
+n144 [label="EqualStatement:"];
+n145 [label="Identifier:b"];
+n144 -> n145
+n146 [label="Identifier:a"];
+n144 -> n146
+n143 -> n144
+n131 -> n143
+n147 [label="MethodBodyStat:"];
+n148 [label="EqualStatement:"];
+n149 [label="Identifier:b"];
+n148 -> n149
+n150 [label="Identifier:c"];
+n148 -> n150
+n147 -> n148
+n131 -> n147
+n151 [label="MethodBodyStat:"];
+n152 [label="EqualStatement:"];
+n153 [label="Identifier:b"];
+n152 -> n153
+n154 [label="Identifier:d"];
+n152 -> n154
+n151 -> n152
+n131 -> n151
+n155 [label="MethodBodyStat:"];
+n156 [label="EqualStatement:"];
+n157 [label="Identifier:c"];
+n156 -> n157
+n158 [label="Identifier:a"];
+n156 -> n158
+n155 -> n156
+n131 -> n155
+n159 [label="MethodBodyStat:"];
+n160 [label="EqualStatement:"];
+n161 [label="Identifier:c"];
+n160 -> n161
+n162 [label="Identifier:b"];
+n160 -> n162
+n159 -> n160
+n131 -> n159
+n163 [label="MethodBodyStat:"];
+n164 [label="EqualStatement:"];
+n165 [label="Identifier:c"];
+n164 -> n165
+n166 [label="Identifier:d"];
+n164 -> n166
+n163 -> n164
+n131 -> n163
+n128 -> n131
+n167 [label="BOOLEAN:false"];
+n128 -> n167
+n25 -> n128
+n10 -> n25
+n9 -> n10
+n168 [label="ClassDeclaration:"];
+n169 [label="Identifier:thatdoExist"];
+n168 -> n169
+n170 [label="VarDeclarationList:"];
+n171 [label="VarDeclaration:"];
+n172 [label="TYPE:INT"];
+n171 -> n172
+n173 [label="Identifier:a"];
+n171 -> n173
+n170 -> n171
+n168 -> n170
+n174 [label="MethodDeclarationList:"];
+n168 -> n174
+n9 -> n168
+n175 [label="ClassDeclaration:"];
+n176 [label="Identifier:classdata"];
+n175 -> n176
+n177 [label="VarDeclarationList:"];
+n178 [label="VarDeclaration:"];
+n179 [label="TYPE:INT"];
+n178 -> n179
+n180 [label="Identifier:x"];
+n178 -> n180
+n177 -> n178
+n181 [label="VarDeclaration:"];
+n182 [label="TYPE:BOOLEAN"];
+n181 -> n182
+n183 [label="Identifier:y"];
+n181 -> n183
+n177 -> n181
+n184 [label="VarDeclaration:"];
+n185 [label="TYPE:INTARR"];
+n184 -> n185
+n186 [label="Identifier:z"];
+n184 -> n186
+n177 -> n184
+n187 [label="VarDeclaration:"];
+n188 [label="Identifier:classthatdoesntExist"];
+n187 -> n188
+n189 [label="Identifier:pem"];
+n187 -> n189
+n177 -> n187
+n190 [label="VarDeclaration:"];
+n191 [label="Identifier:thatdoExist"];
+n190 -> n191
+n192 [label="Identifier:pen"];
+n190 -> n192
+n177 -> n190
+n175 -> n177
+n193 [label="MethodDeclarationList:"];
+n194 [label="MethodDeclaration:"];
+n195 [label="TYPE:INT"];
+n194 -> n195
+n196 [label="Identifier:xFunc"];
+n194 -> n196
+n197 [label="MethodBodyEmpty:"];
+n194 -> n197
+n198 [label="Identifier:x"];
+n194 -> n198
+n193 -> n194
+n199 [label="MethodDeclaration:"];
+n200 [label="TYPE:BOOLEAN"];
+n199 -> n200
+n201 [label="Identifier:yFunc"];
+n199 -> n201
+n202 [label="MethodBodyEmpty:"];
+n199 -> n202
+n203 [label="Identifier:y"];
+n199 -> n203
+n193 -> n199
+n204 [label="MethodDeclaration:"];
+n205 [label="TYPE:INTARR"];
+n204 -> n205
+n206 [label="Identifier:zFunc"];
+n204 -> n206
+n207 [label="MethodBodyEmpty:"];
+n204 -> n207
+n208 [label="Identifier:z"];
+n204 -> n208
+n193 -> n204
+n175 -> n193
+n9 -> n175
+n209 [label="ClassDeclaration:"];
+n210 [label="Identifier:VarUsedBeforeDefinition"];
+n209 -> n210
+n211 [label="VarDeclarationList:"];
+n212 [label="VarDeclaration:"];
+n213 [label="TYPE:INT"];
+n212 -> n213
+n214 [label="Identifier:a"];
+n212 -> n214
+n211 -> n212
+n209 -> n211
+n215 [label="MethodDeclarationList:"];
+n216 [label="MethodDeclarationArguments:"];
+n217 [label="TYPE:INT"];
+n216 -> n217
+n218 [label="Identifier:b"];
+n216 -> n218
+n219 [label="Argumenr:"];
+n220 [label="TYPE:INT"];
+n219 -> n220
+n221 [label="Identifier:b"];
+n219 -> n221
+n216 -> n219
+n222 [label="ArgumentList:"];
+n216 -> n222
+n223 [label="MethodBodyStat:"];
+n224 [label="EqualStatement:"];
+n225 [label="Identifier:a"];
+n224 -> n225
+n226 [label="INT:10"];
+n224 -> n226
+n223 -> n224
+n227 [label="MethodBodyStat:"];
+n228 [label="EqualStatement:"];
+n229 [label="Identifier:b"];
+n228 -> n229
+n230 [label="INT:10"];
+n228 -> n230
+n227 -> n228
+n223 -> n227
+n216 -> n223
+n231 [label="Identifier:a"];
+n216 -> n231
+n215 -> n216
+n209 -> n215
+n9 -> n209
+n0 -> n9
+}

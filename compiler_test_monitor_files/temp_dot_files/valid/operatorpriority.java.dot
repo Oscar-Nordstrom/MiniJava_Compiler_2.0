@@ -1,0 +1,269 @@
+digraph {
+n0 [label="Goal:"];
+n1 [label="MainClass:"];
+n2 [label="Identifier:OperatorPriority"];
+n1 -> n2
+n3 [label="Identifier:a"];
+n1 -> n3
+n4 [label="PrintlnStatement:"];
+n5 [label="ExpressionX2:"];
+n6 [label="NewIdentif:"];
+n7 [label="Identifier:OP"];
+n6 -> n7
+n5 -> n6
+n8 [label="Identifier:arithmetic"];
+n5 -> n8
+n4 -> n5
+n1 -> n4
+n0 -> n1
+n9 [label="ClassList:"];
+n10 [label="ClassDeclaration:"];
+n11 [label="Identifier:OP"];
+n10 -> n11
+n12 [label="VarDeclarationList:"];
+n10 -> n12
+n13 [label="MethodDeclarationList:"];
+n14 [label="MethodDeclaration:"];
+n15 [label="TYPE:INT"];
+n14 -> n15
+n16 [label="Identifier:arithmetic"];
+n14 -> n16
+n17 [label="MethodBodyVar:"];
+n18 [label="VarDeclaration:"];
+n19 [label="TYPE:INT"];
+n18 -> n19
+n20 [label="Identifier:b"];
+n18 -> n20
+n17 -> n18
+n21 [label="MethodBodyStat:"];
+n22 [label="EqualStatement:"];
+n23 [label="Identifier:b"];
+n22 -> n23
+n24 [label="INT:4"];
+n22 -> n24
+n21 -> n22
+n17 -> n21
+n25 [label="MethodBodyVar:"];
+n26 [label="VarDeclaration:"];
+n27 [label="TYPE:INT"];
+n26 -> n27
+n28 [label="Identifier:c"];
+n26 -> n28
+n25 -> n26
+n17 -> n25
+n29 [label="MethodBodyStat:"];
+n30 [label="EqualStatement:"];
+n31 [label="Identifier:c"];
+n30 -> n31
+n32 [label="INT:8"];
+n30 -> n32
+n29 -> n30
+n17 -> n29
+n33 [label="MethodBodyVar:"];
+n34 [label="VarDeclaration:"];
+n35 [label="TYPE:INT"];
+n34 -> n35
+n36 [label="Identifier:ret"];
+n34 -> n36
+n33 -> n34
+n17 -> n33
+n37 [label="MethodBodyStat:"];
+n38 [label="EqualStatement:"];
+n39 [label="Identifier:ret"];
+n38 -> n39
+n40 [label="ExpressionOp:PlusExpression"];
+n41 [label="INT:1"];
+n40 -> n41
+n42 [label="ExpressionOp:MinusExpression"];
+n43 [label="ExpressionOp:DivExpression"];
+n44 [label="INT:18"];
+n43 -> n44
+n45 [label="INT:3"];
+n43 -> n45
+n42 -> n43
+n46 [label="ExpressionOp:PlusExpression"];
+n47 [label="Identifier:b"];
+n46 -> n47
+n48 [label="ExpressionOp:MultExpression"];
+n49 [label="Identifier:c"];
+n48 -> n49
+n50 [label="INT:9"];
+n48 -> n50
+n46 -> n48
+n42 -> n46
+n40 -> n42
+n38 -> n40
+n37 -> n38
+n17 -> n37
+n51 [label="MethodBodyStat:"];
+n52 [label="EqualStatement:"];
+n53 [label="Identifier:ret"];
+n52 -> n53
+n54 [label="ExpressionOp:PlusExpression"];
+n55 [label="INT:1"];
+n54 -> n55
+n56 [label="ExpressionOp:MinusExpression"];
+n57 [label="ExpressionOp:DivExpression"];
+n58 [label="INT:18"];
+n57 -> n58
+n59 [label="INT:3"];
+n57 -> n59
+n56 -> n57
+n60 [label="ExpressionOp:PlusExpression"];
+n61 [label="Identifier:b"];
+n60 -> n61
+n62 [label="ExpressionOp:MultExpression"];
+n63 [label="Identifier:c"];
+n62 -> n63
+n64 [label="INT:9"];
+n62 -> n64
+n60 -> n62
+n56 -> n60
+n54 -> n56
+n52 -> n54
+n51 -> n52
+n17 -> n51
+n14 -> n17
+n65 [label="Identifier:ret"];
+n14 -> n65
+n13 -> n14
+n66 [label="MethodDeclaration:"];
+n67 [label="TYPE:BOOLEAN"];
+n66 -> n67
+n68 [label="Identifier:relational"];
+n66 -> n68
+n69 [label="MethodBodyVar:"];
+n70 [label="VarDeclaration:"];
+n71 [label="TYPE:INT"];
+n70 -> n71
+n72 [label="Identifier:a"];
+n70 -> n72
+n69 -> n70
+n73 [label="MethodBodyVar:"];
+n74 [label="VarDeclaration:"];
+n75 [label="TYPE:INT"];
+n74 -> n75
+n76 [label="Identifier:b"];
+n74 -> n76
+n73 -> n74
+n69 -> n73
+n77 [label="MethodBodyVar:"];
+n78 [label="VarDeclaration:"];
+n79 [label="TYPE:BOOLEAN"];
+n78 -> n79
+n80 [label="Identifier:c"];
+n78 -> n80
+n77 -> n78
+n69 -> n77
+n81 [label="MethodBodyVar:"];
+n82 [label="VarDeclaration:"];
+n83 [label="TYPE:BOOLEAN"];
+n82 -> n83
+n84 [label="Identifier:d"];
+n82 -> n84
+n81 -> n82
+n69 -> n81
+n85 [label="MethodBodyStat:"];
+n86 [label="EqualStatement:"];
+n87 [label="Identifier:a"];
+n86 -> n87
+n88 [label="INT:10"];
+n86 -> n88
+n85 -> n86
+n69 -> n85
+n89 [label="MethodBodyStat:"];
+n90 [label="EqualStatement:"];
+n91 [label="Identifier:b"];
+n90 -> n91
+n92 [label="INT:12"];
+n90 -> n92
+n89 -> n90
+n69 -> n89
+n93 [label="MethodBodyStat:"];
+n94 [label="EqualStatement:"];
+n95 [label="Identifier:d"];
+n94 -> n95
+n96 [label="BOOLEAN:false"];
+n94 -> n96
+n93 -> n94
+n69 -> n93
+n97 [label="MethodBodyStat:"];
+n98 [label="EqualStatement:"];
+n99 [label="Identifier:c"];
+n98 -> n99
+n100 [label="BOOLEAN:true"];
+n98 -> n100
+n97 -> n98
+n69 -> n97
+n101 [label="MethodBodyVar:"];
+n102 [label="VarDeclaration:"];
+n103 [label="Identifier:booleat"];
+n102 -> n103
+n104 [label="Identifier:ret"];
+n102 -> n104
+n101 -> n102
+n69 -> n101
+n105 [label="MethodBodyStat:"];
+n106 [label="EqualStatement:"];
+n107 [label="Identifier:ret"];
+n106 -> n107
+n108 [label="ExpressionOp:OrExpression"];
+n109 [label="ExpressionOp:AndExpression"];
+n110 [label="ExpressionOp:LessThanExpression"];
+n111 [label="Identifier:a"];
+n110 -> n111
+n112 [label="Identifier:b"];
+n110 -> n112
+n109 -> n110
+n113 [label="NotExpression:"];
+n114 [label="Identifier:d"];
+n113 -> n114
+n109 -> n113
+n108 -> n109
+n115 [label="ExpressionOp:EqualExpression"];
+n116 [label="Identifier:d"];
+n115 -> n116
+n117 [label="NotExpression:"];
+n118 [label="Identifier:c"];
+n117 -> n118
+n115 -> n117
+n108 -> n115
+n106 -> n108
+n105 -> n106
+n69 -> n105
+n119 [label="MethodBodyStat:"];
+n120 [label="EqualStatement:"];
+n121 [label="Identifier:ret"];
+n120 -> n121
+n122 [label="ExpressionOp:OrExpression"];
+n123 [label="ExpressionOp:AndExpression"];
+n124 [label="ExpressionOp:LessThanExpression"];
+n125 [label="Identifier:a"];
+n124 -> n125
+n126 [label="Identifier:b"];
+n124 -> n126
+n123 -> n124
+n127 [label="NotExpression:"];
+n128 [label="Identifier:d"];
+n127 -> n128
+n123 -> n127
+n122 -> n123
+n129 [label="ExpressionOp:EqualExpression"];
+n130 [label="Identifier:d"];
+n129 -> n130
+n131 [label="NotExpression:"];
+n132 [label="Identifier:c"];
+n131 -> n132
+n129 -> n131
+n122 -> n129
+n120 -> n122
+n119 -> n120
+n69 -> n119
+n66 -> n69
+n133 [label="Identifier:ret"];
+n66 -> n133
+n13 -> n66
+n10 -> n13
+n9 -> n10
+n0 -> n9
+}

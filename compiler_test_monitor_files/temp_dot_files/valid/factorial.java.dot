@@ -1,0 +1,95 @@
+digraph {
+n0 [label="Goal:"];
+n1 [label="MainClass:"];
+n2 [label="Identifier:Factorial"];
+n1 -> n2
+n3 [label="Identifier:a"];
+n1 -> n3
+n4 [label="PrintlnStatement:"];
+n5 [label="ExpressionX:"];
+n6 [label="NewIdentif:"];
+n7 [label="Identifier:Fac"];
+n6 -> n7
+n5 -> n6
+n8 [label="Identifier:ComputeFac"];
+n5 -> n8
+n9 [label="INT:10"];
+n5 -> n9
+n10 [label="ExpressionList_Comma:"];
+n5 -> n10
+n4 -> n5
+n1 -> n4
+n0 -> n1
+n11 [label="ClassList:"];
+n12 [label="ClassDeclaration:"];
+n13 [label="Identifier:Fac"];
+n12 -> n13
+n14 [label="VarDeclarationList:"];
+n12 -> n14
+n15 [label="MethodDeclarationList:"];
+n16 [label="MethodDeclarationArguments:"];
+n17 [label="TYPE:INT"];
+n16 -> n17
+n18 [label="Identifier:ComputeFac"];
+n16 -> n18
+n19 [label="Argumenr:"];
+n20 [label="TYPE:INT"];
+n19 -> n20
+n21 [label="Identifier:num"];
+n19 -> n21
+n16 -> n19
+n22 [label="ArgumentList:"];
+n16 -> n22
+n23 [label="MethodBodyVar:"];
+n24 [label="VarDeclaration:"];
+n25 [label="TYPE:INT"];
+n24 -> n25
+n26 [label="Identifier:num_aux"];
+n24 -> n26
+n23 -> n24
+n27 [label="MethodBodyStat:"];
+n28 [label="IfElseStatement:"];
+n29 [label="ExpressionOp:LessThanExpression"];
+n30 [label="Identifier:num"];
+n29 -> n30
+n31 [label="INT:1"];
+n29 -> n31
+n28 -> n29
+n32 [label="EqualStatement:"];
+n33 [label="Identifier:num_aux"];
+n32 -> n33
+n34 [label="INT:1"];
+n32 -> n34
+n28 -> n32
+n35 [label="EqualStatement:"];
+n36 [label="Identifier:num_aux"];
+n35 -> n36
+n37 [label="ExpressionOp:MultExpression"];
+n38 [label="Identifier:num"];
+n37 -> n38
+n39 [label="ExpressionX:"];
+n40 [label="This:this"];
+n39 -> n40
+n41 [label="Identifier:ComputeFac"];
+n39 -> n41
+n42 [label="ExpressionOp:MinusExpression"];
+n43 [label="Identifier:num"];
+n42 -> n43
+n44 [label="INT:1"];
+n42 -> n44
+n39 -> n42
+n45 [label="ExpressionList_Comma:"];
+n39 -> n45
+n37 -> n39
+n35 -> n37
+n28 -> n35
+n27 -> n28
+n23 -> n27
+n16 -> n23
+n46 [label="Identifier:num_aux"];
+n16 -> n46
+n15 -> n16
+n12 -> n15
+n11 -> n12
+n0 -> n11
+}
