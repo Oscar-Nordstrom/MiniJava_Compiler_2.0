@@ -1,6 +1,7 @@
 #include "SymbolTable.hh"
 
-SymbolTable::SymbolTable()
+SymbolTable::SymbolTable(ErrorHandler* eh)
+    :eh(eh)
 {
     this->root = new Scope();
     this->currentScope = root;
@@ -17,6 +18,7 @@ void SymbolTable::createSymbolTable(Node *root)
 
 void SymbolTable::printTable()
 {
+    std::cout<<"--------------------------------------------------SYMBOL TABLE--------------------------------------------------"<<std::endl;
     std::cout<<program->type<<" "<<program->id<<std::endl;
     printIndents(1);
     std::cout<<"Classes:\n";
@@ -53,6 +55,12 @@ void SymbolTable::printTable()
             }
         }
     }
+    std::cout<<"----------------------------------------------------------------------------------------------------------------"<<std::endl<<std::endl;
+}
+
+void SymbolTable::reset()
+{
+    this->root->resetScope();
 }
 
 void SymbolTable::printIndents(int indents)
@@ -102,7 +110,8 @@ void SymbolTable::traverseAST(Node *node)
         //create new calss
         tempClass = new Class(classIdentifier, CLASS);
         //insert the new class into the current scope
-        this->put(classIdentifier, (Record*)tempClass);
+        if(!this->put(classIdentifier, (Record*)tempClass))
+            this->eh->addError("Duplicate identifiers", node->lineno);
         this->program->addClass(tempClass);
         tempMethod = nullptr;
 
@@ -110,7 +119,8 @@ void SymbolTable::traverseAST(Node *node)
         this->enterScope();
             //insert new variable "this" to the new class
             tempVariable = new Variable("this", classIdentifier);
-            this->put("this", (Record*)tempVariable);
+            if(!this->put("this", (Record*)tempVariable))
+                this->eh->addError("Duplicate identifiers", node->lineno);
             tempClass->addVaraible(tempVariable);
             //traverse rest of nodes
             this->traverseAST(node->children[1]);
@@ -124,7 +134,8 @@ void SymbolTable::traverseAST(Node *node)
         //Create new class with that name
         tempClass = new Class(classIdentifier, CLASS);
         //insert the new class
-        this->put(classIdentifier, (Record*)tempClass);
+        if(!this->put(classIdentifier, (Record*)tempClass))
+            this->eh->addError("Duplicate identifiers", node->lineno);
         this->program->addClass(tempClass);
         tempMethod = nullptr;
 
@@ -133,12 +144,14 @@ void SymbolTable::traverseAST(Node *node)
             //create new main method
             tempMethod = new Method("main", "VOID");
             //insert new main method
-            this->put(tempMethod->id, (Record*)tempMethod);
+            if(!this->put(tempMethod->id, (Record*)tempMethod))
+                this->eh->addError("Duplicate identifiers", node->lineno);
             tempClass->addMethod(tempMethod);
             //Create new var "this"
             tempVariable = new Variable("this", classIdentifier);
             //insert new var
-            this->put(tempVariable->id, (Record*)tempVariable);
+            if(!this->put(tempVariable->id, (Record*)tempVariable))
+                this->eh->addError("Duplicate identifiers", node->lineno);
             tempClass->addVaraible(tempVariable);
         this->exitScope();
     }
@@ -151,7 +164,8 @@ void SymbolTable::traverseAST(Node *node)
         tempMethod = new Method(identifier, type);
         //Insert new method
         this->put(identifier, (Record*)tempMethod);
-        tempClass->addMethod(tempMethod);
+        if(!tempClass->addMethod(tempMethod))
+            this->eh->addError("Duplicate identifiers", node->lineno);
         //Enetert new scope
         this->enterScope();
         //Traverse child
@@ -180,7 +194,9 @@ void SymbolTable::traverseAST(Node *node)
         {
             tempClass->addVaraible(tempVariable);
         }
-        this->put(identifier, (Record*)tempVariable);
+        
+        if(!this->put(identifier, (Record*)tempVariable))
+            this->eh->addError("Duplicate identifiers", node->lineno);
 
     }
     else if(node->type == ARGUMENT)
@@ -191,7 +207,8 @@ void SymbolTable::traverseAST(Node *node)
         //Cretae new variable
         tempVariable = new Variable(identifier, type);
         //Insert new variable
-        this->put(identifier, (Record*)tempVariable);
+        if(!this->put(identifier, (Record*)tempVariable))
+            this->eh->addError("Duplicate identifiers", node->lineno);
         tempMethod->addParameter(tempVariable);
     }
     else

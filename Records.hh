@@ -35,8 +35,8 @@ class Method: public Record
 {
 public:
     Method(std::string id = "Empty", std::string type = "Empty");
-    void addVaraible(Variable* variable);
-    void addParameter(Variable* parameter);
+    bool addVaraible(Variable* variable);
+    bool addParameter(Variable* parameter);
     Variable* lookupVar(std::string id);
     Variable* lookupParam(std::string id);
     std::vector<StrVar> variables;
@@ -56,8 +56,8 @@ class Class: public Record
 {
 public:
     Class(std::string id = "Empty", std::string type = "Empty");
-    void addVaraible(Variable* variable);
-    void addMethod(Method* method);
+    bool addVaraible(Variable* variable);
+    bool addMethod(Method* method);
     Variable* lookupVar(std::string id);
     Method* lookupMrthod(std::string id);
     std::vector<StrVar> variables;
@@ -77,7 +77,7 @@ class Program: public Record
 {
 public:
     Program(std::string id = "Empty", std::string type = "Empty");
-    void addClass(Class* cls);
+    bool addClass(Class* cls);
     Class* lookupClass(std::string id);
     std::vector<StrCls> classes;
 private:

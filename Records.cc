@@ -22,27 +22,29 @@ Method::Method(std::string id, std::string type)
 {
 }
 
-void Method::addVaraible(Variable *variable)
+bool Method::addVaraible(Variable *variable)
 {
     if(this->canAddVar(variable))
     {
         this->variables.push_back({variable->id, variable});
+        return true;
     }
     else
     {
-        std::cout<<"Error: Could not add var.\n";
+        return false;
     }
 }
 
-void Method::addParameter(Variable *parameter)
+bool Method::addParameter(Variable *parameter)
 {
     if(this->canAddParam(parameter))
     {
         this->parameters.push_back({parameter->id, parameter});
+        return true;
     }
     else
     {
-        std::cout<<"Error: Could not add param.\n";
+        return false;
     }
 }
 
@@ -99,27 +101,29 @@ Class::Class(std::string id, std::string type)
 {
 }
 
-void Class::addVaraible(Variable *variable)
+bool Class::addVaraible(Variable *variable)
 {
     if(this->canAddVar(variable))
     {
         this->variables.push_back({variable->id, variable});
+        return true;
     }
     else
     {
-        std::cout<<"Error: Could not add var.\n";
+        return false;
     }
 }
 
-void Class::addMethod(Method *method)
+bool Class::addMethod(Method *method)
 {
     if(this->canAddMethod(method))
     {
         this->methods.push_back({method->id, method});
+        return true;
     }
     else
     {
-        std::cout<<"Error: Could not add method.\n";
+        return false;
     }
 }
 
@@ -176,15 +180,16 @@ Program::Program(std::string id, std::string type)
 {
 }
 
-void Program::addClass(Class *cls)
+bool Program::addClass(Class *cls)
 {
     if(this->canAddClass(cls))
     {
         this->classes.push_back({cls->id, cls});
+        return true;
     }
     else
     {
-        std::cout<<"Error: Could not add class.\n";
+        return true;
     }
 }
 

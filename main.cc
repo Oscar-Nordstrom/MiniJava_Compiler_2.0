@@ -1,6 +1,9 @@
 #include<iostream>
+#include <vector>
 #include "parser.tab.hh"
 #include "SymbolTable.hh"
+#include "SymanticAnalyzer.hh"
+#include "ErrorHandler.hh"
 
 extern Node* root;
 extern FILE* yyin;
@@ -38,7 +41,9 @@ int main(int argc, char **argv)
   }
 
   yy::parser parser;
-  SymbolTable st;
+  ErrorHandler eh;
+  SymbolTable st(&eh);
+  SymanticAnalyzer sa(&st, &eh);
 
   if(!parser.parse() && !lexical_errors) {
 
@@ -52,16 +57,18 @@ int main(int argc, char **argv)
     root->generate_tree();
     std::cout<<std::endl;
     st.createSymbolTable(root);
-    st.printTable();
+
+    
 
     if(PRINT_ST)
     {
-      //symbolTable.printTable();
+      st.printTable();
     }
-    if(false/*!symAn.Analyze(root)*/)
+    sa.analyzeAst(root);
+    if(eh.hasErrors())
     {
       errCode = FAILED_SEMANTIC;
-      //symAn.PrintErrors();
+      eh.printErrors();
     }
   }
   else
