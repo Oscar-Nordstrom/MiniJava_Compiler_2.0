@@ -296,116 +296,128 @@ n41 -> n145
 n38 -> n41
 n150 [label="BOOLEAN:true"];
 n38 -> n150
-n37 -> n38
-n151 [label="MethodDeclaration:"];
-n152 [label="TYPE:BOOLEAN"];
+n151 [label="RETURN_TYPE:"];
+n152 [label="BOOLEAN:true"];
 n151 -> n152
-n153 [label="Identifier:operator_test_work"];
-n151 -> n153
-n154 [label="MethodBodyStat:"];
-n155 [label="EqualStatement:"];
-n156 [label="Identifier:i1"];
-n155 -> n156
-n157 [label="ExpressionOp:PlusExpression"];
+n38 -> n151
+n37 -> n38
+n153 [label="MethodDeclaration:"];
+n154 [label="TYPE:BOOLEAN"];
+n153 -> n154
+n155 [label="Identifier:operator_test_work"];
+n153 -> n155
+n156 [label="MethodBodyStat:"];
+n157 [label="EqualStatement:"];
 n158 [label="Identifier:i1"];
 n157 -> n158
-n159 [label="Identifier:i2"];
+n159 [label="ExpressionOp:PlusExpression"];
+n160 [label="Identifier:i1"];
+n159 -> n160
+n161 [label="Identifier:i2"];
+n159 -> n161
 n157 -> n159
-n155 -> n157
-n154 -> n155
-n160 [label="MethodBodyStat:"];
-n161 [label="EqualStatement:"];
-n162 [label="Identifier:i1"];
-n161 -> n162
-n163 [label="ExpressionOp:PlusExpression"];
-n164 [label="ExpressionArr:"];
-n165 [label="Identifier:ia1"];
-n164 -> n165
-n166 [label="INT:1"];
-n164 -> n166
+n156 -> n157
+n162 [label="MethodBodyStat:"];
+n163 [label="EqualStatement:"];
+n164 [label="Identifier:i1"];
 n163 -> n164
-n167 [label="ExpressionArr:"];
-n168 [label="Identifier:ia2"];
-n167 -> n168
-n169 [label="INT:2"];
-n167 -> n169
-n163 -> n167
-n161 -> n163
-n160 -> n161
-n154 -> n160
-n170 [label="MethodBodyStat:"];
-n171 [label="EqualStatement:"];
-n172 [label="Identifier:i1"];
-n171 -> n172
-n173 [label="ExpressionOp:PlusExpression"];
-n174 [label="ExpressionArr:"];
-n175 [label="ExpressionX2:"];
-n176 [label="Identifier:c1"];
-n175 -> n176
-n177 [label="Identifier:get_trash"];
-n175 -> n177
-n174 -> n175
-n178 [label="INT:2"];
-n174 -> n178
+n165 [label="ExpressionOp:PlusExpression"];
+n166 [label="ExpressionArr:"];
+n167 [label="Identifier:ia1"];
+n166 -> n167
+n168 [label="INT:1"];
+n166 -> n168
+n165 -> n166
+n169 [label="ExpressionArr:"];
+n170 [label="Identifier:ia2"];
+n169 -> n170
+n171 [label="INT:2"];
+n169 -> n171
+n165 -> n169
+n163 -> n165
+n162 -> n163
+n156 -> n162
+n172 [label="MethodBodyStat:"];
+n173 [label="EqualStatement:"];
+n174 [label="Identifier:i1"];
 n173 -> n174
-n179 [label="Identifier:i2"];
-n173 -> n179
-n171 -> n173
-n170 -> n171
-n154 -> n170
-n180 [label="MethodBodyStat:"];
-n181 [label="EqualStatement:"];
-n182 [label="Identifier:b1"];
-n181 -> n182
-n183 [label="ExpressionOp:AndExpression"];
+n175 [label="ExpressionOp:PlusExpression"];
+n176 [label="ExpressionArr:"];
+n177 [label="ExpressionX2:"];
+n178 [label="Identifier:c1"];
+n177 -> n178
+n179 [label="Identifier:get_trash"];
+n177 -> n179
+n176 -> n177
+n180 [label="INT:2"];
+n176 -> n180
+n175 -> n176
+n181 [label="Identifier:i2"];
+n175 -> n181
+n173 -> n175
+n172 -> n173
+n156 -> n172
+n182 [label="MethodBodyStat:"];
+n183 [label="EqualStatement:"];
 n184 [label="Identifier:b1"];
 n183 -> n184
-n185 [label="Identifier:b2"];
+n185 [label="ExpressionOp:AndExpression"];
+n186 [label="Identifier:b1"];
+n185 -> n186
+n187 [label="Identifier:b2"];
+n185 -> n187
 n183 -> n185
-n181 -> n183
-n180 -> n181
-n154 -> n180
-n186 [label="MethodBodyStat:"];
-n187 [label="EqualStatement:"];
-n188 [label="Identifier:b1"];
-n187 -> n188
-n189 [label="ExpressionOp:LessThanExpression"];
-n190 [label="Identifier:i1"];
+n182 -> n183
+n156 -> n182
+n188 [label="MethodBodyStat:"];
+n189 [label="EqualStatement:"];
+n190 [label="Identifier:b1"];
 n189 -> n190
-n191 [label="Identifier:i2"];
+n191 [label="ExpressionOp:LessThanExpression"];
+n192 [label="Identifier:i1"];
+n191 -> n192
+n193 [label="Identifier:i2"];
+n191 -> n193
 n189 -> n191
-n187 -> n189
-n186 -> n187
-n154 -> n186
-n151 -> n154
-n192 [label="BOOLEAN:true"];
-n151 -> n192
-n37 -> n151
+n188 -> n189
+n156 -> n188
+n153 -> n156
+n194 [label="BOOLEAN:true"];
+n153 -> n194
+n195 [label="RETURN_TYPE:"];
+n196 [label="BOOLEAN:true"];
+n195 -> n196
+n153 -> n195
+n37 -> n153
 n10 -> n37
 n9 -> n10
-n193 [label="ClassDeclaration:"];
-n194 [label="Identifier:ClassDatatest"];
-n193 -> n194
-n195 [label="VarDeclarationList:"];
-n196 [label="VarDeclaration:"];
-n197 [label="TYPE:INTARR"];
-n196 -> n197
-n198 [label="Identifier:trash"];
-n196 -> n198
-n195 -> n196
-n193 -> n195
-n199 [label="MethodDeclarationList:"];
-n200 [label="MethodDeclaration:"];
+n197 [label="ClassDeclaration:"];
+n198 [label="Identifier:ClassDatatest"];
+n197 -> n198
+n199 [label="VarDeclarationList:"];
+n200 [label="VarDeclaration:"];
 n201 [label="TYPE:INTARR"];
 n200 -> n201
-n202 [label="Identifier:get_trash"];
+n202 [label="Identifier:trash"];
 n200 -> n202
-n203 [label="MethodBodyEmpty:"];
-n200 -> n203
-n204 [label="Identifier:trash"];
-n200 -> n204
 n199 -> n200
-n193 -> n199
-n9 -> n193
+n197 -> n199
+n203 [label="MethodDeclarationList:"];
+n204 [label="MethodDeclaration:"];
+n205 [label="TYPE:INTARR"];
+n204 -> n205
+n206 [label="Identifier:get_trash"];
+n204 -> n206
+n207 [label="MethodBodyEmpty:"];
+n204 -> n207
+n208 [label="Identifier:trash"];
+n204 -> n208
+n209 [label="RETURN_TYPE:"];
+n210 [label="Identifier:trash"];
+n209 -> n210
+n204 -> n209
+n203 -> n204
+n197 -> n203
+n9 -> n197
 n0 -> n9
 }

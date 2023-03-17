@@ -24,7 +24,7 @@ bool ErrorHandler::hasErrors()
 {
     if(this->errors.size() > 0)
     {
-        std::cout<<this->errors.size()<<std::endl;
+        //std::cout<<this->errors.size()<<std::endl;
         return true;
     }
     return false;

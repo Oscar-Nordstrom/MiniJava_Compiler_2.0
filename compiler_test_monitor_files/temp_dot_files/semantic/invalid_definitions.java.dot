@@ -487,13 +487,29 @@ n246 [label="INT:10"];
 n244 -> n246
 n243 -> n244
 n239 -> n243
-n232 -> n239
-n247 [label="Identifier:a"];
-n232 -> n247
-n248 [label="RETURN_TYPE:"];
-n249 [label="Identifier:a"];
+n247 [label="MethodBodyStat:"];
+n248 [label="EqualStatement:"];
+n249 [label="Identifier:c"];
 n248 -> n249
-n232 -> n248
+n250 [label="INT:11"];
+n248 -> n250
+n247 -> n248
+n239 -> n247
+n251 [label="MethodBodyVar:"];
+n252 [label="VarDeclaration:"];
+n253 [label="TYPE:INT"];
+n252 -> n253
+n254 [label="Identifier:c"];
+n252 -> n254
+n251 -> n252
+n239 -> n251
+n232 -> n239
+n255 [label="Identifier:a"];
+n232 -> n255
+n256 [label="RETURN_TYPE:"];
+n257 [label="Identifier:a"];
+n256 -> n257
+n232 -> n256
 n231 -> n232
 n225 -> n231
 n9 -> n225

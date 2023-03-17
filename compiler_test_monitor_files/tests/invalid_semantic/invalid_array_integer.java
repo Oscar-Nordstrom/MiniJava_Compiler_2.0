@@ -22,6 +22,6 @@ class A {
     public int[] a2() {
         int a;
         a[0] = 2; //fail
-        return a; //fail
-    }
+        return a;
+    } //fail
 }

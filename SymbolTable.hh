@@ -21,12 +21,12 @@ public:
     void exitScope();
     Record* lookup(std::string key);
     bool put(std::string key, Record* rec);
+    Program* program;
 private:
     void printIndents(int indents);
     void traverseAST(Node* node);
 private:
     Scope* root;
     Scope* currentScope;
-    Program* program;
     ErrorHandler* eh;
 };

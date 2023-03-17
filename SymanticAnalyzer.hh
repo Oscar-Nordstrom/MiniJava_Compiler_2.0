@@ -3,6 +3,7 @@
 #include "Node.h"
 #include "SymbolTable.hh"
 #include "ErrorHandler.hh"
+#include "Records.hh"
 
 #include <string>
 #include <iostream>

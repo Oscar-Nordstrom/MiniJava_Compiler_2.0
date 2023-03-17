@@ -189,7 +189,7 @@ bool Program::addClass(Class *cls)
     }
     else
     {
-        return true;
+        return false;
     }
 }
 

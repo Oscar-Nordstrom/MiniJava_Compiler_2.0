@@ -113,6 +113,7 @@ void SymbolTable::traverseAST(Node *node)
         if(!this->put(classIdentifier, (Record*)tempClass))
             this->eh->addError("Duplicate identifiers", node->lineno);
         this->program->addClass(tempClass);
+        //this->program->lookupClass(tempClass->id);
         tempMethod = nullptr;
 
         //Enter the new scope
