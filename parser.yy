@@ -41,7 +41,8 @@
 %left     <std::string> AND                 //Logical AND
 %left     <std::string> EQUALEQUAL          //Equality
 %left     <std::string> LESSTHAN MORETHAN   //Relational
-%right    <std::string> PLUSOP MINUSOP NOT  //Additive
+%right    <std::string> PLUSOP NOT          //Additive
+%right    <std::string> MINUSOP             //Additive
 %left     <std::string> MULTOP DIVOP        //Multiplicative
 %left     <std::string> DOT                 //Postfix
 
@@ -183,20 +184,26 @@ methodDeclaration:
   PUBLIC type identifier LP RP LCB methodBodyList RETURN expression SEMICOLON RCB
   {
     $$ = new Node(METHOD_DECLARATION, "", yylineno);
+    Node* retNode = new Node("RETURN_TYPE", "", yylineno);
+    retNode->children.push_back($9);
     $$->children.push_back($2);
     $$->children.push_back($3);
     $$->children.push_back($7);
     $$->children.push_back($9);
+    $$->children.push_back(retNode);
   }
   |PUBLIC type identifier LP arg argumentList RP LCB methodBodyList RETURN expression SEMICOLON RCB
   {
     $$ = new Node(METHOD_DECLARATION_ARGUMENTS, "", yylineno);
+    Node* retNode = new Node("RETURN_TYPE", "", yylineno);
+    retNode->children.push_back($11);
     $$->children.push_back($2);
     $$->children.push_back($3);
     $$->children.push_back($5);
     $$->children.push_back($6);
     $$->children.push_back($9);
     $$->children.push_back($11);
+    $$->children.push_back(retNode);
   }
 ;         
 
@@ -270,10 +277,10 @@ statementList:
   }
   |statement
   {
-    $$ = $1;
+    $$ = new Node(STATEMENT_LIST, "", yylineno);
+    $$->children.push_back($1);
   }
-  |
-  statementList statement
+  |statementList statement
   {
     $$ = $1;
     $$->children.push_back($2);

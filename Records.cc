@@ -139,7 +139,7 @@ Variable *Class::lookupVar(std::string id)
     return nullptr;
 }
 
-Method *Class::lookupMrthod(std::string id)
+Method *Class::lookupMethod(std::string id)
 {
     for(auto& m: this->methods)
     {

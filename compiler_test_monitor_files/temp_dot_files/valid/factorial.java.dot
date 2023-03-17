@@ -88,6 +88,10 @@ n23 -> n27
 n16 -> n23
 n46 [label="Identifier:num_aux"];
 n16 -> n46
+n47 [label="RETURN_TYPE:"];
+n48 [label="Identifier:num_aux"];
+n47 -> n48
+n16 -> n47
 n15 -> n16
 n12 -> n15
 n11 -> n12

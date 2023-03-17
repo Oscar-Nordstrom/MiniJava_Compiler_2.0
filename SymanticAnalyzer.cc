@@ -17,7 +17,7 @@ Node* SymanticAnalyzer::traverseTree(Node *node)
         this->st->enterScope();
 
         //std::cout<<"Node : "<<node->type << " " << node->value <<" Line:" << node->lineno << "\n";
-        
+
         if(node->type == MAIN_CLASS)
         {
             this->traverseTree(node->children[2]);
@@ -56,12 +56,33 @@ Node* SymanticAnalyzer::traverseTree(Node *node)
             //Traverse method body list
             this->traverseTree(node->children[4]);
         }
-        else if(node->type == EXPRESSION_X)
-        {
+        else if(node->type == EXPRESSION_X || node->type == EXPRESSION_X2)
+        {    
+            Class* cls = this->methodCallGetClass(node->children[0]);
+            if(cls != nullptr)
+            {
+                Method* meth = cls->lookupMethod(node->children[1]->value);
+                if(meth == nullptr)
+                {
+                    std::string errStr = node->children[1]->value + " not defined";
+                    this->eh->addError(errStr, node->lineno);
+                }
+                else
+                {
+                    if(node->type == EXPRESSION_X)
+                    {
+                        this->checkMethodCallArgs(node->children[2], node->children[3]->children, meth, node);
+                        this->traverseTree(node->children[2]);
+                        this->traverseTree(node->children[3]);
+                    }
+                    this->nodeVec.push_back(new Node(meth->type, meth->id, node->lineno));
+                    return this->nodeVec.back();
+                }
+            }
+            
+            
 
-        }
-        else if(node->type == EXPRESSION_X2)
-        {
+
 
         }
         else if(node->type == IF_ELSE_STATEMENT)
@@ -94,7 +115,17 @@ Node* SymanticAnalyzer::traverseTree(Node *node)
         }
         else if(node->type == NEW_IDENTIFIER)
         {
-
+            Record* rec = this->st->lookup(node->children[0]->value);
+            if(rec == nullptr)
+            {
+                std::string errStr = node->children[0]->value + " not defined";
+                this->eh->addError(errStr, node->lineno);
+            }
+            else
+            {
+                this->nodeVec.push_back(new Node(rec->type, rec->id, node->lineno));
+                return this->nodeVec.back();
+            }
         }
         else if(node->type == NOT_EXPRESSION)
         {
@@ -119,7 +150,9 @@ Node* SymanticAnalyzer::traverseTree(Node *node)
         }
         else if(node->type == THIS)
         {
-            
+            Record* rec = this->st->lookup("this");
+            this->nodeVec.push_back(new Node(rec->type, rec->id, node->lineno));
+            return this->nodeVec.back();
         }
         else if(node->type == TYPE)
         {
@@ -145,7 +178,7 @@ Node* SymanticAnalyzer::traverseTree(Node *node)
 
 bool SymanticAnalyzer::checkEnterScope(Node *node)
 {
-     if(node->type == GOAL 
+     if(node->type == GOAL
         ||node->type == MAIN_CLASS
         ||node->type == CLASS_DECLARATION
         ||node->type == METHOD_DECLARATION
@@ -158,13 +191,13 @@ bool SymanticAnalyzer::checkEnterScope(Node *node)
 
 bool SymanticAnalyzer::checkMethodType(Node* n1, Node* n2)
 {
-    
+
     if(n1->type == n2->type)
     {
         return true;
     }
-    std::string one = n1->type;   
-    std::string two = n2->type;   
+    std::string one = n1->type;
+    std::string two = n2->type;
     if(n1->type == CLASS || n1->type == THIS)
     {
         one = n1->value;
@@ -178,7 +211,78 @@ bool SymanticAnalyzer::checkMethodType(Node* n1, Node* n2)
     {
         return true;
     }
-    
+
 
     return false;
+}
+
+void SymanticAnalyzer::checkMethodCallArgs(Node *arg1, std::vector<Node *> argList, Method *method, Node *node)
+{
+    std::vector<Node*> args;
+    args.push_back(arg1);
+    for(auto a: argList)
+    {
+        args.push_back(a);
+    }
+    
+
+
+    if(args.size() != method->parameters.size())
+    {
+        this->eh->addError("Incorrect number of arguments", node->lineno);
+        return;
+    }
+    std::string nodeType;
+    //std::cout<<"Checking "<<args.size()<<" args!\n";
+    for(int i = 0; i < args.size(); i++)
+    {
+        //std::cout<<"Checking "<<args[i]->type<<" and "<<method->parameters[i].var->type<<std::endl;
+        //std::cout<<"Checking "<<args[i]->value<<" and "<<method->parameters[i].var->id<<std::endl;
+        if(args[i]->type != method->parameters[i].var->type)
+        {
+            //Check for special cases
+            if(args[i]->type == IDENTIFIER)
+            {
+                nodeType = this->st->lookup(args[i]->value)->type;
+            }
+            else
+            {
+                //Temporary to show info
+                nodeType = args[i]->type;
+            }
+            
+            
+            if(nodeType != method->parameters[i].var->type)
+            {
+                std::string errStr = args[i]->type + " not the same as " + method->parameters[i].var->type;
+                this->eh->addError(errStr, node->lineno);
+            }
+        }
+        else
+        {
+            std::cout<<args[i]->type<<" is the same as "<<method->parameters[i].var->type<<std::endl;
+        }
+    }
+}
+
+Class *SymanticAnalyzer::methodCallGetClass(Node *node)
+{
+    Class* ret = nullptr;
+    //std::cout<<"node:"<<node->type<<" "<<node->value<<std::endl;
+    Node* travRet = this->traverseTree(node);
+    //std::cout<<"node:"<<travRet->type<<" "<<travRet->value<<std::endl;
+
+    if(travRet->type == CLASS)
+    {
+        ret = (Class*)this->st->lookup(travRet->value);
+    }
+    else if(this->st->lookup(travRet->type)->type == CLASS)
+    {
+        ret = (Class*)this->st->lookup(travRet->type);
+    }
+
+    //Record* rec = this->st->lookup(node->type);
+    //std::cout<<rec->type<<" "<<rec->id<<std::endl;
+
+    return ret;
 }

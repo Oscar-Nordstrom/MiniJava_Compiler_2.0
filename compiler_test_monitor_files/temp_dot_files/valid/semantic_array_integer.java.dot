@@ -102,33 +102,41 @@ n22 -> n47
 n15 -> n22
 n53 [label="This:this"];
 n15 -> n53
-n14 -> n15
-n54 [label="MethodDeclaration:"];
-n55 [label="TYPE:INTARR"];
+n54 [label="RETURN_TYPE:"];
+n55 [label="This:this"];
 n54 -> n55
-n56 [label="Identifier:a2"];
-n54 -> n56
-n57 [label="MethodBodyVar:"];
-n58 [label="VarDeclaration:"];
-n59 [label="TYPE:INTARR"];
-n58 -> n59
-n60 [label="Identifier:a"];
-n58 -> n60
-n57 -> n58
-n61 [label="MethodBodyStat:"];
-n62 [label="EqualArrStatement:"];
-n63 [label="Identifier:a"];
-n62 -> n63
-n64 [label="INT:0"];
-n62 -> n64
-n65 [label="INT:2"];
-n62 -> n65
-n61 -> n62
-n57 -> n61
-n54 -> n57
-n66 [label="Identifier:a"];
-n54 -> n66
-n14 -> n54
+n15 -> n54
+n14 -> n15
+n56 [label="MethodDeclaration:"];
+n57 [label="TYPE:INTARR"];
+n56 -> n57
+n58 [label="Identifier:a2"];
+n56 -> n58
+n59 [label="MethodBodyVar:"];
+n60 [label="VarDeclaration:"];
+n61 [label="TYPE:INTARR"];
+n60 -> n61
+n62 [label="Identifier:a"];
+n60 -> n62
+n59 -> n60
+n63 [label="MethodBodyStat:"];
+n64 [label="EqualArrStatement:"];
+n65 [label="Identifier:a"];
+n64 -> n65
+n66 [label="INT:0"];
+n64 -> n66
+n67 [label="INT:2"];
+n64 -> n67
+n63 -> n64
+n59 -> n63
+n56 -> n59
+n68 [label="Identifier:a"];
+n56 -> n68
+n69 [label="RETURN_TYPE:"];
+n70 [label="Identifier:a"];
+n69 -> n70
+n56 -> n69
+n14 -> n56
 n11 -> n14
 n10 -> n11
 n0 -> n10

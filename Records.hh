@@ -59,7 +59,7 @@ public:
     bool addVaraible(Variable* variable);
     bool addMethod(Method* method);
     Variable* lookupVar(std::string id);
-    Method* lookupMrthod(std::string id);
+    Method* lookupMethod(std::string id);
     std::vector<StrVar> variables;
     std::vector<StrMeth> methods;
 private:

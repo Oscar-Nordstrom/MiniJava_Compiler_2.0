@@ -16,6 +16,8 @@ private:
     Node* traverseTree(Node* node);
     bool checkEnterScope(Node* node);
     bool checkMethodType(Node* n1, Node* n2);
+    void checkMethodCallArgs(Node* arg1, std::vector<Node *> argList,  Method* method, Node* node);
+    Class* methodCallGetClass(Node* node);
     SymbolTable* st;
     ErrorHandler* eh;
 
