@@ -4,6 +4,7 @@
 #include "SymbolTable.hh"
 #include "SymanticAnalyzer.hh"
 #include "ErrorHandler.hh"
+#include "IntermediateRepresentation.hh"
 
 extern Node* root;
 extern FILE* yyin;
@@ -44,6 +45,7 @@ int main(int argc, char **argv)
   ErrorHandler eh;
   SymbolTable st(&eh);
   SymanticAnalyzer sa(&st, &eh);
+  IR ir(&st);
 
   if(!parser.parse() && !lexical_errors) {
 
@@ -63,6 +65,7 @@ int main(int argc, char **argv)
     if(PRINT_ST)
     {
       st.printTable();
+    
     }
     sa.analyzeAst(root);
     if(eh.hasErrors())
@@ -70,13 +73,17 @@ int main(int argc, char **argv)
       errCode = FAILED_SEMANTIC;
       eh.printErrors();
     }
+    else
+    {
+      ir.createCFG(root);
+    }
   }
   else
   {
-      if (errCode == errCodes::SUCCESS)
-      {
-          errCode = errCodes::FAILED_TREE;
-      }
+    if (errCode == errCodes::SUCCESS)
+    {
+      errCode = errCodes::FAILED_TREE;
+    }
   }
 
   
