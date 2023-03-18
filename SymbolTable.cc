@@ -122,7 +122,7 @@ void SymbolTable::traverseAST(Node *node)
             tempVariable = new Variable("this", classIdentifier);
             if(!this->put("this", (Record*)tempVariable))
                 this->eh->addError("Duplicate identifiers", node->lineno);
-            tempClass->addVaraible(tempVariable);
+            tempClass->addVariable(tempVariable);
             //traverse rest of nodes
             this->traverseAST(node->children[1]);
             this->traverseAST(node->children[2]);
@@ -153,7 +153,7 @@ void SymbolTable::traverseAST(Node *node)
             //insert new var
             if(!this->put(tempVariable->id, (Record*)tempVariable))
                 this->eh->addError("Duplicate identifiers", node->lineno);
-            tempClass->addVaraible(tempVariable);
+            tempClass->addVariable(tempVariable);
         this->exitScope();
     }
     else if(node->type == METHOD_DECLARATION || node->type == METHOD_DECLARATION_ARGUMENTS)
@@ -188,12 +188,12 @@ void SymbolTable::traverseAST(Node *node)
         //Insert new variable in method
         if(tempMethod != nullptr)
         {
-            tempMethod->addVaraible(tempVariable);
+            tempMethod->addVariable(tempVariable);
         }
         //Insert new variable in class
         else
         {
-            tempClass->addVaraible(tempVariable);
+            tempClass->addVariable(tempVariable);
         }
         
         if(!this->put(identifier, (Record*)tempVariable))

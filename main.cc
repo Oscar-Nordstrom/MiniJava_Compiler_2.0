@@ -65,7 +65,6 @@ int main(int argc, char **argv)
     if(PRINT_ST)
     {
       st.printTable();
-    
     }
     sa.analyzeAst(root);
     if(eh.hasErrors())

@@ -22,7 +22,7 @@ Method::Method(std::string id, std::string type)
 {
 }
 
-bool Method::addVaraible(Variable *variable)
+bool Method::addVariable(Variable *variable)
 {
     if(this->canAddVar(variable))
     {
@@ -101,7 +101,7 @@ Class::Class(std::string id, std::string type)
 {
 }
 
-bool Class::addVaraible(Variable *variable)
+bool Class::addVariable(Variable *variable)
 {
     if(this->canAddVar(variable))
     {

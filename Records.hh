@@ -35,7 +35,7 @@ class Method: public Record
 {
 public:
     Method(std::string id = "Empty", std::string type = "Empty");
-    bool addVaraible(Variable* variable);
+    bool addVariable(Variable* variable);
     bool addParameter(Variable* parameter);
     Variable* lookupVar(std::string id);
     Variable* lookupParam(std::string id);
@@ -56,7 +56,7 @@ class Class: public Record
 {
 public:
     Class(std::string id = "Empty", std::string type = "Empty");
-    bool addVaraible(Variable* variable);
+    bool addVariable(Variable* variable);
     bool addMethod(Method* method);
     Variable* lookupVar(std::string id);
     Method* lookupMethod(std::string id);

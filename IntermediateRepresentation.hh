@@ -35,6 +35,8 @@ struct CFG_method
     {
         this->name = name;
         this->className = className;
+        this->rootBlock = block;
+        this->rootNode = node;
     }
     std::string name;
     std::string className;
@@ -66,8 +68,12 @@ private:
     void fillClass(Node *node, std::string className);
     void printClasses();
     Ret* traverseTree(Node *node, BBlock* block);
-    SymbolTable *st;
-    int blockID;
-    std::vector<CFG_class> cfg_classes;
+    std::string getID();
     CFG_class* getCfgClass(std::string className);
+private:
+    int blockID;
+    SymbolTable *st;
+    Class* currentClass;
+    Method* currentMethod;
+    std::vector<CFG_class> cfg_classes;
 };

@@ -184,7 +184,7 @@ methodDeclaration:
   PUBLIC type identifier LP RP LCB methodBodyList RETURN expression SEMICOLON RCB
   {
     $$ = new Node(METHOD_DECLARATION, "", yylineno);
-    Node* retNode = new Node("RETURN_TYPE", "", yylineno);
+    Node* retNode = new Node(RETURN_TYPE, "", yylineno);
     retNode->children.push_back($9);
     $$->children.push_back($2);
     $$->children.push_back($3);
@@ -195,7 +195,7 @@ methodDeclaration:
   |PUBLIC type identifier LP arg argumentList RP LCB methodBodyList RETURN expression SEMICOLON RCB
   {
     $$ = new Node(METHOD_DECLARATION_ARGUMENTS, "", yylineno);
-    Node* retNode = new Node("RETURN_TYPE", "", yylineno);
+    Node* retNode = new Node(RETURN_TYPE, "", yylineno);
     retNode->children.push_back($11);
     $$->children.push_back($2);
     $$->children.push_back($3);
