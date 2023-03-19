@@ -2,6 +2,7 @@
 
 #include <string>
 #include <vector>
+#include <fstream>
 
 #include "SymbolTable.hh"
 #include "BBlock.hh"
@@ -70,6 +71,9 @@ private:
     std::string getID();
     CFG_class* getCfgClass(std::string className);
     void handleExpressionOp(std::string& type, std::string& op, std::string nodeVal);
+
+    void printMethod(CFG_method& method, std::ofstream& file);
+    void printMethodContents(BBlock* block, std::ofstream& file);
 private:
     int blockID;
     SymbolTable *st;

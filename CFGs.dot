@@ -1,0 +1,29 @@
+digraph {
+	graph [splines=ortho];
+	node [shape=box];
+subgraph cluster_E {
+label = "E";
+subgraph cluster_main {
+label = "main";
+block0[label="block0
+var0 := $4 * $2
+var1 := $2 * $6
+var2 := $10 - var1
+var3 := $4 - $1
+var4 := var3 * $2
+var5 := var4 / $2
+var6 := var2 + var5
+var7 := var0 + var6
+print var7
+var8 := ! $true
+var9 := var8 && $false
+var10 := $true == var9
+var11 := $10 > $1
+var12 := $1 < $10
+var13 := var11 && var12
+var14 := var10 || var13
+print var14
+"];
+}
+}
+}

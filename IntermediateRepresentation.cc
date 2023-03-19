@@ -42,6 +42,32 @@ void IR::createCFG(Node *root)
 
 void IR::printCFG()
 {
+    std::ofstream file;
+    file.open("CFGs.dot");
+    if(!file.is_open())
+    {
+        std::cout<<"Could not create file: CFGs.dot\n";
+        return;
+    }
+
+    file << "digraph {"<<std::endl;
+    file << "\tgraph [splines=ortho];"<<std::endl;
+    file << "\tnode [shape=box];"<<std::endl;
+
+
+    for(auto& c: cfg_classes)
+    {
+        file << "subgraph cluster_" << c.name << " {" << std::endl; 
+        file << "label = \""<< c.name <<"\";" << std::endl;  
+        for(auto& m: c.methods)
+        {
+           this->printMethod(m, file);
+        }
+        file << "}" << std::endl; 
+    }
+
+    file <<"}";
+    file.close();
 }
 
 void IR::setup(Node *node)
@@ -320,8 +346,10 @@ Ret* IR::traverseTree(Node *node, BBlock* block)
         //Insert new variable
         this->st->put(res->id, res);
         this->currentMethod->addVariable(res);
+        //Add three address code instructions
+        block->tacs.push_back(new NewArray(res->id, INT_ARR, expressionInBrackets));
         //Set return name to result var name
-        ret->name == res->id;
+        ret->name = res->id;
     }
     else if(node->type == MAIN_CLASS)
     {
@@ -432,5 +460,45 @@ void IR::handleExpressionOp(std::string &type, std::string &op, std::string node
     {
         type = BOOLEAN;
         op = "==";
+    }
+}
+
+void IR::printMethod(CFG_method& method, std::ofstream& file)
+{
+    file << "subgraph cluster_" << method.name << " {" << std::endl; 
+    file << "label = \""<< method.name <<"\";" << std::endl;  
+    this->printMethodContents(method.rootBlock, file);
+    file << "}" << std::endl; 
+}
+
+void IR::printMethodContents(BBlock* block, std::ofstream& file)
+{
+
+    if(block->printed)
+    {
+        return;
+    }
+    block->printed = true;
+
+    file <<block->name<<"[label=\""<<block->name<<std::endl;
+
+    for(auto& t: block->tacs)
+    {
+        file<<t->getTAC()<<std::endl;
+    }
+
+    file << "\"];"<<std::endl;
+
+
+
+    if(block->trueExit != nullptr)
+    {
+        this->printMethodContents(block->trueExit, file);
+        file << block->name << "->"  << block->trueExit->name << "[label=\"true\"];";
+    }
+    if(block->falseExit != nullptr)
+    {
+        this->printMethodContents(block->falseExit, file);
+        file << block->name << "->"  << block->falseExit->name << "[label=\"false\"];";
     }
 }
