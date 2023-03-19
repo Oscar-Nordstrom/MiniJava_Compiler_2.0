@@ -54,6 +54,11 @@ struct CFG_class
     std::vector<CFG_method> methods;
 };
 
+struct CFG_program
+{
+    std::vector<CFG_class> cfg_classes;
+};
+
 class IR
 {
 public:
@@ -61,7 +66,7 @@ public:
     // Run setup. Fill each method by traversing ast
     void createCFG(Node *root);
     void printCFG();
-
+    CFG_program* getProg();
 private:
     // Fill cfg_classes vector with all calsses, and all calsses with methods
     void setup(Node *node);
@@ -79,5 +84,5 @@ private:
     SymbolTable *st;
     Class* currentClass;
     Method* currentMethod;
-    std::vector<CFG_class> cfg_classes;
+    CFG_program program;
 };

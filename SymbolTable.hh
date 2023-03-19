@@ -20,6 +20,7 @@ public:
     void enterScope();
     void exitScope();
     Record* lookup(std::string key);
+    Method* lookupMethod(std::string cls, std::string method);
     bool put(std::string key, Record* rec);
     Program* program;
 private:

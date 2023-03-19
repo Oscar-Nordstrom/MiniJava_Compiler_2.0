@@ -3,6 +3,7 @@
 Tac::Tac(std::string result, std::string lhs, std::string op, std::string rhs)
     :result(result), lhs(lhs), op(op), rhs(rhs)
 {
+    this->type = TacType::Default;
 }
 
 std::string Tac::getTAC()
@@ -13,6 +14,7 @@ std::string Tac::getTAC()
 Expression::Expression(std::string result, std::string lhs, std::string op, std::string rhs)
     :Tac(result, lhs, op, rhs)
 {
+    this->type = TacType::Expression;
 }
 
 std::string Expression::getTAC()
@@ -24,6 +26,7 @@ std::string Expression::getTAC()
 UnaryExpression::UnaryExpression(std::string result, std::string op, std::string rhs)
     :Tac(result, "", op, rhs)
 {
+    this->type = TacType::UnaryExpression;
 }
 
 std::string UnaryExpression::getTAC()
@@ -35,6 +38,7 @@ std::string UnaryExpression::getTAC()
 Copy::Copy(std::string result, std::string lhs)
     :Tac(result, lhs, "", "")
 {
+    this->type = TacType::Copy;
 }
 
 std::string Copy::getTAC()
@@ -46,6 +50,7 @@ std::string Copy::getTAC()
 ArrayAccess::ArrayAccess(std::string result, std::string lhs)
     :Tac(result, lhs, "", "")
 {
+    this->type = TacType::ArrayAccess;
 }
 
 std::string ArrayAccess::getTAC()
@@ -57,6 +62,7 @@ std::string ArrayAccess::getTAC()
 New::New(std::string result, std::string type)
     :Tac(result, type, "", "")
 {
+    this->type = TacType::New;
 }
 
 std::string New::getTAC()
@@ -68,6 +74,7 @@ std::string New::getTAC()
 NewArray::NewArray(std::string result, std::string type, std::string size)
     :Tac(result, type, size, "")
 {
+    this->type = TacType::NewArray;
 }
 
 std::string NewArray::getTAC()
@@ -79,6 +86,7 @@ std::string NewArray::getTAC()
 Length::Length(std::string result, std::string lhs)
     :Tac(result, lhs, "", "")
 {
+    this->type = TacType::Length;
 }
 
 std::string Length::getTAC()
@@ -90,6 +98,7 @@ std::string Length::getTAC()
 PrintLn::PrintLn(std::string toPrint)
     :Tac(toPrint, "", "", "")
 {
+    this->type = TacType::PrintLn;
 }
 
 std::string PrintLn::getTAC()
@@ -101,6 +110,7 @@ std::string PrintLn::getTAC()
 Param::Param(std::string param)
     :Tac(param, "", "", "")
 {
+    this->type = TacType::Param;
 }
 
 std::string Param::getTAC()
@@ -112,6 +122,7 @@ std::string Param::getTAC()
 MethodCall::MethodCall(std::string result, std::string function, std::string numParams)
     :Tac(result, function, numParams, "")
 {
+    this->type = TacType::MethodCall;
 }
 
 std::string MethodCall::getTAC()
@@ -123,6 +134,7 @@ std::string MethodCall::getTAC()
 Return::Return(std::string ret)
     :Tac(ret, "", "", "")
 {
+    this->type = TacType::Return;
 }
 
 std::string Return::getTAC()
@@ -134,6 +146,7 @@ std::string Return::getTAC()
 Jump::Jump(std::string goTO)
     :Tac(goTO, "", "", "")
 {
+    this->type = TacType::Jump;
 }
 
 std::string Jump::getTAC()
@@ -145,6 +158,7 @@ std::string Jump::getTAC()
 ConditionalJump::ConditionalJump(std::string iffalse, std::string goTO)
     :Tac(iffalse, goTO, "", "")
 {
+    this->type = TacType::ConditionalJump;
 }
 
 std::string ConditionalJump::getTAC()

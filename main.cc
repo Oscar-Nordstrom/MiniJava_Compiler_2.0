@@ -5,6 +5,7 @@
 #include "SymanticAnalyzer.hh"
 #include "ErrorHandler.hh"
 #include "IntermediateRepresentation.hh"
+#include "CodeGenerator.hh"
 
 extern Node* root;
 extern FILE* yyin;
@@ -46,6 +47,7 @@ int main(int argc, char **argv)
   SymbolTable st(&eh);
   SymanticAnalyzer sa(&st, &eh);
   IR ir(&st);
+  CodeGeneartor cg(&st);
 
   if(!parser.parse() && !lexical_errors) {
 
@@ -75,6 +77,9 @@ int main(int argc, char **argv)
     {
       ir.createCFG(root);
       ir.printCFG();
+      cg.generate(ir.getProg());
+      //cg.printCode();
+      cg.writeToFile();
     }
   }
   else

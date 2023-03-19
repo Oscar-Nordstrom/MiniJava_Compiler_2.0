@@ -7,8 +7,7 @@ enum class TacType
     Expression,
     UnaryExpression,
     Copy,
-    ArrayAccessFrom,
-    ArrayAccessTo,
+    ArrayAccess,
     New,
     NewArray,
     Length,
@@ -16,7 +15,7 @@ enum class TacType
     Param,
     MethodCall,
     Return,
-    UnconditionalJump,
+    Jump,
     ConditionalJump,
     Default
 };

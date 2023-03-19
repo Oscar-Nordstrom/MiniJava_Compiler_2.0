@@ -12,7 +12,7 @@ void IR::createCFG(Node *root)
     this->st->reset();
     //Eneter program scope
     this->st->enterScope();
-    for(auto& c: this->cfg_classes)
+    for(auto& c: this->program.cfg_classes)
     {
         //Set current class
         this->currentClass = (Class*)this->st->lookup(c.name);
@@ -55,7 +55,7 @@ void IR::printCFG()
     file << "\tnode [shape=box];"<<std::endl;
 
 
-    for(auto& c: cfg_classes)
+    for(auto& c: this->program.cfg_classes)
     {
         file << "subgraph cluster_" << c.name << " {" << std::endl; 
         file << "label = \""<< c.name <<"\";" << std::endl;  
@@ -70,17 +70,22 @@ void IR::printCFG()
     file.close();
 }
 
+CFG_program *IR::getProg()
+{
+    return &this->program;
+}
+
 void IR::setup(Node *node)
 {
     if(node->type == CLASS_DECLARATION)
     {
-        this->cfg_classes.push_back(CFG_class(node->children[0]->value));
+        this->program.cfg_classes.push_back(CFG_class(node->children[0]->value));
         this->fillClass(node, node->children[0]->value);
     }
     else if(node->type == MAIN_CLASS)
     {
-        this->cfg_classes.push_back(CFG_class(node->children[0]->value));
-        this->cfg_classes.at(this->cfg_classes.size()-1).methods.push_back(CFG_method("main", node->children[0]->value, node, new BBlock("block"+std::to_string(this->blockID++))));
+        this->program.cfg_classes.push_back(CFG_class(node->children[0]->value));
+        this->program.cfg_classes.at(this->program.cfg_classes.size()-1).methods.push_back(CFG_method("main", node->children[0]->value, node, new BBlock("block"+std::to_string(this->blockID++))));
     }
     for(auto c: node->children)
     {
@@ -103,7 +108,7 @@ void IR::fillClass(Node *node, std::string className)
 void IR::printClasses()
 {
     std::cout<<"Printing classes:\n";
-    for(auto& c: this->cfg_classes)
+    for(auto& c: this->program.cfg_classes)
     {
         std::cout<<"Class: "<<c.name<<std::endl;
         for(auto& m: c.methods)
@@ -404,7 +409,7 @@ std::string IR::getID()
 
 CFG_class *IR::getCfgClass(std::string className)
 {
-    for(auto& c: this->cfg_classes)
+    for(auto& c: this->program.cfg_classes)
     {
         if(className == c.name)
         {

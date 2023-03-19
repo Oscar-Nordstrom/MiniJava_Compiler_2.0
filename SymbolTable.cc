@@ -97,6 +97,18 @@ Record *SymbolTable::lookup(std::string key)
     return this->currentScope->lookup(key);
 }
 
+Method *SymbolTable::lookupMethod(std::string cls, std::string method)
+{
+    for(auto& c: this->program->classes)
+    {
+        if(c.id == cls)
+        {
+            return c.cls->lookupMethod(method);
+        }
+    }
+    return nullptr;
+}
+
 void SymbolTable::traverseAST(Node *node)
 {
     static Class*       tempClass    = nullptr;
