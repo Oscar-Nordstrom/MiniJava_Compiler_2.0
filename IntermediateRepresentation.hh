@@ -9,24 +9,23 @@
 
 struct Ret
 {
-    Ret(std::string name, BBlock* block, Node* node)
-        :name(name), block(block), node(node)
+    Ret(std::string name, BBlock* block)
+        :name(name), block(block)
     {
 
     }
     Ret(std::string name)
-        :name(name), block(nullptr), node(nullptr)
+        :name(name), block(nullptr)
     {
 
     }
     Ret()
-        :name(""), block(nullptr), node(nullptr)
+        :name(""), block(nullptr)
     {
 
     }
     std::string name;
     BBlock* block;
-    Node* node;
 };
 
 struct CFG_method
@@ -70,6 +69,7 @@ private:
     Ret* traverseTree(Node *node, BBlock* block);
     std::string getID();
     CFG_class* getCfgClass(std::string className);
+    void handleExpressionOp(std::string& type, std::string& op, std::string nodeVal);
 private:
     int blockID;
     SymbolTable *st;

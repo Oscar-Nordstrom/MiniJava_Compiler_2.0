@@ -89,58 +89,239 @@ void IR::printClasses()
 
 Ret* IR::traverseTree(Node *node, BBlock* block)
 {
-    Ret* ret = new Ret("", block, node);
+    Ret* ret = new Ret("", block);
 
     //std::cout<<"Node: "<<node->type<<" "<<node->value<<std::endl;
 
     if(node->type == IF_ELSE_STATEMENT)
     {
+        //Create new blocks
+        BBlock* newTrueBlock   = new BBlock("trueBlock"+getID());
+        BBlock* newFalseBlock  = new BBlock("falseBlock"+getID());
+        BBlock* newJoinBlock   = new BBlock("joinBlock"+getID());
+
+        //Connect current block to true and false blocks
+        block->trueExit = newTrueBlock;
+        block->falseExit = newFalseBlock;
+
+        //Traverse true and false block to handle nested statements
+        Ret* t = this->traverseTree(node->children[1], newTrueBlock);
+        Ret* f = this->traverseTree(node->children[2], newFalseBlock);
+
+        //Set true and false blocks true exit
+        t->block->trueExit = newJoinBlock;
+        f->block->trueExit = newJoinBlock;
+
+        //Get if expression
+        std::string ifExpressionName = this->traverseTree(node->children[0], block)->name;
+        //Add three address code instructions
+        block->tacs.push_back(new ConditionalJump(ifExpressionName, newFalseBlock->name));
+        t->block->tacs.push_back(new Jump(newJoinBlock->name));
+        f->block->tacs.push_back(new Jump(newJoinBlock->name));
+
+        //Set return to join block
+        ret->block = newJoinBlock;
+        ret->name = newJoinBlock->name;
 
     }
     else if(node->type == WHILE_STATEMENT)
     {
+        //Create new blocks
+        BBlock* newWhileBlock = new BBlock("whileBlock"+getID());
+        BBlock* newTrueExit = new BBlock("trueExit"+getID());
+        BBlock* newFalseExit = new BBlock("falseExit"+getID());
 
+        //Connect current block
+        block->trueExit = newWhileBlock;
+
+        //Connect true and false block
+        newWhileBlock->trueExit = newTrueExit;
+        newWhileBlock->falseExit = newFalseExit;
+
+        //Traverse statement to get the block that connects back to the while block
+        BBlock* trueJoinBlock = this->traverseTree(node->children[1], newTrueExit)->block;
+        //Connect block to while block
+        trueJoinBlock->trueExit = newWhileBlock;
+
+        //Get expression name
+        std::string expressionName = this->traverseTree(node->children[0], newWhileBlock)->name;
+
+        //Add three address code instructions
+        newWhileBlock->tacs.push_back(new ConditionalJump(expressionName, newFalseExit->name));
+        trueJoinBlock->tacs.push_back(new Jump(newWhileBlock->name));
+
+        //Set ret to false block
+        ret->block = newFalseExit;
+        ret->name = newFalseExit->name;
     }
     else if(node->type == EQUAL_STATEMENT)
     {
-
+        //Get identifiers
+        std::string identifier = node->children[0]->value;
+        std::string equalExpression = this->traverseTree(node->children[1], block)->name;
+        //Add three address code instruction
+        block->tacs.push_back(new Copy(identifier, equalExpression));
     }
     else if(node->type == EQUAL_ARR_STATEMENT)
     {
-
+        //Get all identifiers
+        std::string identifier = node->children[0]->value;
+        std::string bracketExpression = this->traverseTree(node->children[1], block)->name;
+        std::string equalExpression = this->traverseTree(node->children[2], block)->name;
+        //Add three addres code instruction
+        block->tacs.push_back(new ArrayAccess(identifier+"[" + bracketExpression + "]", equalExpression));
+    }
+    else if(node->type == IDENTIFIER)
+    {
+        ret->name = node->value;
+    }
+    else if(node->type == THIS)
+    {
+        ret->name = "this";
     }
     else if(node->type == PRINTLN_STATEMENT)
     {
-
+        std::string expressionName = this->traverseTree(node->children[0], block)->name;
+        block->tacs.push_back(new PrintLn(expressionName));
     }
     else if(node->type == EXPRESSION_X || node->type == EXPRESSION_X2)
     {
+        //Get name of expression
+        std::string targetExpressionName = this->traverseTree(node->children[0], block)->name;
+        //Store parameter for target
+        block->tacs.push_back(new Param(targetExpressionName));
+        //Store number of parameters
+        int numParams = 1;
+        //Store rest of parameters (only expression_x has parameters)
+        if(node->type == EXPRESSION_X )
+        {
+            //Store parameter for first paramater
+            std::string par1Name = this->traverseTree(node->children[2], block)->name;
+            block->tacs.push_back(new Param(par1Name));
+            //Add number of params
+            numParams++;
+            //Traverse rest of parameters and store each one
+            std::string parxName;
+            for(auto c: node->children[3]->children)
+            {
+                parxName = this->traverseTree(c, block)->name;
+                block->tacs.push_back(new Param(parxName));
+                //Add number of params
+                numParams++;
+            }
 
+        }
+         
+        //Get class
+        Record* recClass = this->st->lookup(targetExpressionName);
+        Class* cls;
+        if(recClass->type == CLASS)
+            cls = this->st->program->lookupClass(recClass->id);
+        else
+            cls = this->st->program->lookupClass(recClass->type);
+        //Get the method name
+        std::string methodName = node->children[1]->value;
+        //Get method
+        Method* meth = cls->lookupMethod(methodName);
+        //Create new variable for result
+        Variable* res = new Variable("var"+getID(), meth->type);
+        //insert new variable
+        this->st->put(res->id, res);
+        this->currentMethod->addVariable(res);
+        //Add three address code instruction
+        block->tacs.push_back(new MethodCall(res->id, methodName, std::to_string(numParams)));
+        //Set return to result var name
+        ret->name = res->id;
     }
     else if(node->type == EXPRESSION_OP)
     {
+        //Get names of expressions
+        std::string expressionName1 = this->traverseTree(node->children[0], block)->name;
+        std::string expressionName2 = this->traverseTree(node->children[1], block)->name;
 
+        //Get specific type and operator
+        std::string type, op;
+        this->handleExpressionOp(type, op, node->value);
+        //Create new var for result
+        Variable* res = new Variable("var"+getID(), type);
+        //Insert new variable
+        this->st->put(res->id, res);
+        this->currentMethod->addVariable(res);
+        //Add three address code instruction
+        block->tacs.push_back(new Expression(res->id, expressionName1, op, expressionName2));
+        //Set return name to result var name
+        ret->name = res->id;
     }
     else if(node->type == EXPRESSION_ARR)
     {
+        //Get expression and index
+        std::string expressionName = this->traverseTree(node->children[0], block)->name;
+        std::string indexName = this->traverseTree(node->children[1], block)->name;
+        //Create new var for result
+        Variable* res = new Variable("var"+getID(), INT);
+        //Insert new Variable
+        this->st->put(res->id, res);
+        this->currentMethod->addVariable(res);
+        //Add three address code instruction
+        block->tacs.push_back(new ArrayAccess(res->id, expressionName+"["+indexName+"]"));
+        //Set return name to result var name
+        ret->name = res->id;
 
     }
     else if(node->type == NOT_EXPRESSION)
     {
+        //Get name of expression
+        std::string expressionName = this->traverseTree(node->children[0], block)->name;
+        //Create new Variable for result
+        Variable* res = new Variable("var"+getID(), BOOLEAN);
+        //Insesrt new variable
+        this->st->put(res->id, res);
+        this->currentMethod->addVariable(res);
+        //Add Three address code
+        block->tacs.push_back(new UnaryExpression(res->id,"!", expressionName));
+        //Sert return name to result var name
+        ret->name = res->id;
 
     }
     else if(node->type == EXPRESSION_LEN)
     {
-        //Traverse for expression
-        Ret* exp = this->traverseTree(node->children[0], block);
-        //Create new variable
-        Variable* var = new Variable(INT, std::string("var"+getID()));
-        this->st->put(var->id, var);
-        this->currentMethod->addVariable(var);
-
-        block->tacs.push_back(new Length(var->id, exp->name));
-
-        ret->name = var->id;
+        //Get expression name
+        std::string expressionName = this->traverseTree(node->children[0], block)->name;
+        //Create new variable for result
+        Variable* res = new Variable(INT, std::string("var"+getID()));
+        //Insert new variable
+        this->st->put(res->id, res);
+        this->currentMethod->addVariable(res);
+        //Add three address code instruction
+        block->tacs.push_back(new Length(res->id, expressionName));
+        //Set return name to the result var name
+        ret->name = res->id;
+    }
+    else if(node->type == NEW_IDENTIFIER)
+    {
+        //Get type
+        std::string type = node->children[0]->value;
+        //Create new var for result
+        Variable* res = new Variable("var"+getID(), type);
+        //insert new variable
+        this->st->put(res->id, res);
+        this->currentMethod->addVariable(res);
+        //Add three address code
+        block->tacs.push_back(new New(res->id, type));
+        //Set return to name of result var
+        ret->name = res->id;
+    }
+    else if(node->type == NEW_INT_ARR)
+    {
+        //Get expression insode brackets
+        std::string expressionInBrackets = this->traverseTree(node->children[0], block)->name;
+        //Create new variable for result
+        Variable* res = new Variable("var"+getID(), INT_ARR);
+        //Insert new variable
+        this->st->put(res->id, res);
+        this->currentMethod->addVariable(res);
+        //Set return name to result var name
+        ret->name == res->id;
     }
     else if(node->type == MAIN_CLASS)
     {
@@ -165,8 +346,10 @@ Ret* IR::traverseTree(Node *node, BBlock* block)
     }
     else if(node->type == RETURN_TYPE)
     {
-        std::string exp = this->traverseTree(node->children[0], block)->name;
-        block->tacs.push_back(new Return(exp));
+        //Get expression name
+        std::string expressionName = this->traverseTree(node->children[0], block)->name;
+        //Add three address code
+        block->tacs.push_back(new Return(expressionName));
     }
     else if(node->type == INT || node->type == BOOLEAN)
     {
@@ -201,4 +384,53 @@ CFG_class *IR::getCfgClass(std::string className)
         }
     }
     return nullptr;
+}
+
+void IR::handleExpressionOp(std::string &type, std::string &op, std::string nodeVal)
+{
+    if(nodeVal == AND_EXPRESSION)
+    {
+        type = BOOLEAN;
+        op = "&&";
+    }
+    else if(nodeVal == OR_EXPRESSION)
+    {
+        type = BOOLEAN;
+        op = "||";
+    }
+    else if(nodeVal == LESS_THAN_EXPRESSION)
+    {
+        type = BOOLEAN;
+        op = "<";
+    }
+    else if(nodeVal == MORE_THAN_EXPRESSION)
+    {
+        type = BOOLEAN;
+        op = ">";
+    }
+    else if(nodeVal == PLUS_EXPRESSION)
+    {
+        type = INT;
+        op = "+";
+    }
+    else if(nodeVal == MINUS_EXPRESSION)
+    {
+        type = INT;
+        op = "-";
+    }
+    else if(nodeVal == MULT_EXPRESSION)
+    {
+        type = INT;
+        op = "*";
+    }
+    else if(nodeVal == DIV_EXPRESSION)
+    {
+        type = INT;
+        op = "/";
+    }
+    else if(nodeVal == EQUAL_EXPRESSION)
+    {
+        type = BOOLEAN;
+        op = "==";
+    }
 }
