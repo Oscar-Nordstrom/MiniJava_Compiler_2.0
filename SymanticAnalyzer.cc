@@ -87,7 +87,7 @@ Node* SymanticAnalyzer::traverseTree(Node *node)
             //Check if the return is of type bool
             if(exp->type != BOOLEAN)
             {
-                std::cout<<"exp: "<<exp->type<<" "<<exp->value<<std::endl;
+                //std::cout<<"exp: "<<exp->type<<" "<<exp->value<<std::endl;
                 std::string errStr = "epxression not of type BOOLEAN";
                 this->eh->addError(errStr, node->lineno);
             }
@@ -100,7 +100,7 @@ Node* SymanticAnalyzer::traverseTree(Node *node)
             //Check if the return is of type bool
             if(exp->type != BOOLEAN)
             {
-                std::cout<<"exp: "<<exp->type<<" "<<exp->value<<std::endl;
+                //std::cout<<"exp: "<<exp->type<<" "<<exp->value<<std::endl;
                 std::string errStr = "epxression not of type BOOLEAN";
                 this->eh->addError(errStr, node->lineno);
             }
@@ -114,7 +114,7 @@ Node* SymanticAnalyzer::traverseTree(Node *node)
             //Check if the return is of type bool
             if(exp->type != BOOLEAN)
             {
-                std::cout<<"exp: "<<exp->type<<" "<<exp->value<<std::endl;
+                //std::cout<<"exp: "<<exp->type<<" "<<exp->value<<std::endl;
                 std::string errStr = "epxression not of type BOOLEAN";
                 this->eh->addError(errStr, node->lineno);
             }
@@ -409,6 +409,8 @@ void SymanticAnalyzer::checkMethodCallArgs(Node *arg1, std::vector<Node *> argLi
             {
                 nodeType = nodeID;
             }
+
+
             if(nodeType != method->parameters[i].var->type)
             {
                 
