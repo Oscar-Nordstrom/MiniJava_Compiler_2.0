@@ -13,16 +13,8 @@ void CodeGeneartor::generate(CFG_program *program)
         {
             Method* met = this->st->lookupMethod(m.className, m.name);
             ByteCodeMethod method;
-            method.instructions.push_back(ByteCodeInstruction());
-            method.instructions.back().name = "parameters";
             method.setData(std::string(m.className+"."+m.name));
 
-
-            for(auto p: met->parameters)
-            {
-                method.vars.push_back(p.var);
-                method.instructions[0].arguments.insert(method.instructions[0].arguments.begin(), Bytecode(InstructionType::istore, p.var->id));
-            }
             for(auto v: met->variables)
             {
                 method.vars.push_back(v.var);
@@ -105,49 +97,9 @@ void CodeGeneartor::generateCode(BBlock *block, std::string className, std::stri
     method.instructions.push_back(ByteCodeInstruction());
     method.instructions.back().name = block->name;
     //std::cout<<"Pusing back instruction: "<< method.instructions.back().name<<std::endl;
-
-    //Method* curMeth = this->st->lookupMethod(className, methodName);
-    //std::stack<Param*> parameters;
     
     for(auto t: block->tacs)
     {
-        // //Push parameter to a stack
-        // if(t->type == TacType::Param)
-        // {
-        //     parameters.push((Param*)t);
-        // }
-        // //If we find a method call, then ew need to use the correct class name for the Tac
-        // else if(t->type == TacType::MethodCall)
-        // {
-        //     //remove all but one parameter
-        //     int numParams = std::stoi(t->rhs);
-        //     for(int i = 0; i < numParams-1; i++)
-        //     {
-        //         parameters.pop();
-        //     }
-            
-        //     std::string classToUse;
-
-        //     //If the parameter was "this", use the current class
-        //     if(parameters.top()->result == "this")
-        //     {
-        //         classToUse = className;
-        //     }
-        //     //If the parameter was not "this", use the type of the variable
-        //     else
-        //     {
-        //         Variable* v1 = curMeth->lookupVar(parameters.top()->result);
-        //         if(v1 == nullptr)
-        //         {
-        //             v1 = curMeth->lookupParam(parameters.top()->result);
-        //         }
-        //         classToUse = v1->type;
-        //     }
-        //     //Set the class name
-        //     ((MethodCall*)t)->className = classToUse;
-        //     //pop last parameter
-        //     parameters.pop();
-        // }
         //Get the bytecode
         std::vector<Bytecode> ret = this->translator.translateTac(t);
         for(auto c: ret)

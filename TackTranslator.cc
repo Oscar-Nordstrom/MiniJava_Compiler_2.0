@@ -109,50 +109,12 @@ std::vector<Bytecode> TacTranslator::translateTac(Tac* tac)
         ret.push_back(Bytecode(InstructionType::inot));
         ret.push_back(Bytecode(InstructionType::istore, tac->result));
         break;
-    }   
-    case TacType::Copy :
-    {
-        InstructionType LHS = this->determineType(tac->lhs);
-        ret.push_back(Bytecode(LHS, tac->lhs));
-        ret.push_back(Bytecode(InstructionType::istore, tac->result));
-        break;
-    }   
+    }     
     case TacType::PrintLn :
     {
         InstructionType RESULT = this->determineType(tac->result);
         ret.push_back(Bytecode(RESULT, tac->result));
         ret.push_back(Bytecode(InstructionType::print));
-        break;
-    }  
-    case TacType::Param :
-    {
-        InstructionType RES = this->determineType(tac->result);
-        ret.push_back(Bytecode(RES, tac->result));
-        break;
-    }  
-    case TacType::MethodCall :
-    {
-        ret.push_back(Bytecode(InstructionType::invokevirtual_m, ((MethodCall*)tac)->className+"."+tac->lhs));
-        ret.push_back(Bytecode(InstructionType::istore, tac->result));
-        break;
-    }  
-    case TacType::Return :
-    {
-        InstructionType RES = this->determineType(tac->result);
-        ret.push_back(Bytecode(RES, tac->result));
-        ret.push_back(Bytecode(InstructionType::ireturn));
-        break;
-    }  
-    case TacType::Jump :
-    {
-        ret.push_back(Bytecode(InstructionType::goto_i, tac->result));
-        break;
-    }  
-    case TacType::ConditionalJump :
-    {
-        InstructionType RESULT = this->determineType(tac->result);
-        ret.push_back(Bytecode(RESULT, tac->result));
-        ret.push_back(Bytecode(InstructionType::iffalse_goto_i, tac->op));
         break;
     }  
     }

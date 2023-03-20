@@ -31,9 +31,7 @@ BOOLEAN
 var13
 BOOLEAN
 var14
-2
-parameters
-0
+1
 block0
 64
 iconst
