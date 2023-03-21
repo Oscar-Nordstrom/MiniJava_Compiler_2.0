@@ -54,7 +54,12 @@
 			"typeinfo": "cpp",
 			"map": "cpp",
 			"cwctype": "cpp",
-			"span": "cpp"
+			"span": "cpp",
+			"cerrno": "cpp",
+			"climits": "cpp",
+			"ios": "cpp",
+			"queue": "cpp",
+			"stack": "cpp"
 		}
 	}
 }

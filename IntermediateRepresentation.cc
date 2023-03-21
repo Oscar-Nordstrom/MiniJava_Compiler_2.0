@@ -219,11 +219,9 @@ Ret* IR::traverseTree(Node *node, BBlock* block)
     {
         //Get name of expression
         std::string targetExpressionName = this->traverseTree(node->children[0], block)->name;
-        //Store parameter for target
-        block->tacs.push_back(new Param(targetExpressionName));
         //Store number of parameters
-        int numParams = 1;
-        //Store rest of parameters (only expression_x has parameters)
+        int numParams = 0;
+        //Store parameters (only expression_x has parameters)
         if(node->type == EXPRESSION_X )
         {
             //Store parameter for first paramater
@@ -360,23 +358,6 @@ Ret* IR::traverseTree(Node *node, BBlock* block)
     {
         ret = this->traverseTree(node->children[2], block);
     }
-    else if(node->type == METHOD_DECLARATION || node->type == METHOD_DECLARATION_ARGUMENTS)
-    {
-        //Set return expression of method call as return block
-        if(node->type == METHOD_DECLARATION)
-        {
-            ret->block = this->traverseTree(node->children[3], block)->block;
-        }
-        else
-        {
-            ret->block = this->traverseTree(node->children[5], block)->block;
-        }
-        //Traverse children nodes
-        for(auto n: node->children)
-        {
-            ret = this->traverseTree(n, ret->block);
-        }
-    }
     else if(node->type == RETURN_TYPE)
     {
         //Get expression name
@@ -384,7 +365,12 @@ Ret* IR::traverseTree(Node *node, BBlock* block)
         //Add three address code
         block->tacs.push_back(new Return(expressionName));
     }
-    else if(node->type == INT || node->type == BOOLEAN)
+    else if(node->type == INT)
+    {
+        //Set $ in front of constant
+        ret->name = "$"+node->value;
+    }
+    else if(node->type == BOOLEAN)
     {
         //Set $ in front of constant
         ret->name = "$"+node->value;

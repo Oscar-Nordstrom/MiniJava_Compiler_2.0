@@ -19,7 +19,7 @@ void CodeGeneartor::generate(CFG_program *program)
             {
                 method.vars.push_back(v.var);
             }
-            this->generateCode(m.rootBlock, m.className, m.name, method);
+            this->generateCode(m.rootBlock, m.name, method);
             this->prog.methods.insert({m.name, &method});
             this->prog.methodsVec.push_back(method);
         }
@@ -86,7 +86,7 @@ void CodeGeneartor::writeToFile()
     file.close();
 }
 
-void CodeGeneartor::generateCode(BBlock *block, std::string className, std::string methodName, ByteCodeMethod &method)
+void CodeGeneartor::generateCode(BBlock *block, std::string methodName, ByteCodeMethod &method)
 {
     if(block->visited)
     {
@@ -112,11 +112,11 @@ void CodeGeneartor::generateCode(BBlock *block, std::string className, std::stri
     //Gererate code for true and false block
     if(block->trueExit != nullptr)
     {
-        this->generateCode(block->trueExit, className, methodName, method);
+        this->generateCode(block->trueExit, methodName, method);
     }
     if(block->falseExit != nullptr)
     {
-        this->generateCode(block->falseExit, className, methodName, method);
+        this->generateCode(block->falseExit, methodName, method);
     }
 
     //If the method is main, push back a stop argument last
@@ -128,7 +128,7 @@ void CodeGeneartor::generateCode(BBlock *block, std::string className, std::stri
 
 std::string CodeGeneartor::getTypeString(InstructionType type)
 {
-     std::string ret = "";
+    std::string ret = "";
     switch (type)
     {
     case InstructionType::iload: 

@@ -17,7 +17,7 @@ public:
     void printCode();
     void writeToFile();
 private:
-    void generateCode(BBlock *block, std::string className, std::string methodName, ByteCodeMethod &method);
+    void generateCode(BBlock *block, std::string methodName, ByteCodeMethod &method);
     std::string getTypeString(InstructionType type);
     TacTranslator translator;
     SymbolTable* st;
